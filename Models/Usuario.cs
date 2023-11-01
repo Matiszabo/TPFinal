@@ -1,6 +1,6 @@
 namespace Prac.Models
 {
-    public class Alumnos
+    public class Usuario
     {
         public int ID_Usuario { get;set;}
         public string nombre { get;set;}

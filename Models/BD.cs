@@ -49,8 +49,5 @@ public static void InsertViaje(Viaje viaje)
         });
     }
 }
-
-
-    
     }
 }

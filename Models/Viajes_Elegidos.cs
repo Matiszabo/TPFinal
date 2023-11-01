@@ -10,4 +10,3 @@ namespace Prac.Models
         public int puntaje { get;set;}        
     }
 }
-//

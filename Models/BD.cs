@@ -21,16 +21,16 @@ namespace Prac.Models
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT * FROM Usuarios WHERE nombre = @nombre";
-                return db.QueryFirstOrDefault<Usuario>(sql, new{ nombre = Nombre });
+                string sql = "SELECT * FROM Usuarios WHERE nombre = @pnombre";
+                return db.QueryFirstOrDefault<Usuario>(sql, new{ pnombre = nombre });
             }
         }
         public static Usuario BuscarContraXUsuario(string nombre)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT contraseña FROM Usuarios WHERE nombre = @nombre";
-                return db.QueryFirstOrDefault<Usuario>(sql, new{ nombre = Nombre });
+                string sql = "SELECT contraseña FROM Usuarios WHERE nombre = @pnombre";
+                return db.QueryFirstOrDefault<Usuario>(sql, new{ pnombre = nombre });
             }
         }
         public static List<Pais> SeleccionarPaises()
@@ -54,7 +54,7 @@ namespace Prac.Models
             }
             return Elegido;
         }
-        public static void InsertViaje(Viaje viaje)
+        public static void InsertViaje(Viajes viaje)
         {
             string SQL = "sp_InsertViajes";
             SQL += " VALUES (@pID_Viaje, @pnombre, @pprecio, @pimagen, @pdescripcion, @ppuntaje, @pID_Pais)";
@@ -89,10 +89,10 @@ namespace Prac.Models
                 );
             }
         }
-        public static void InssertUsuario(Usuario usuario)
+        public static void InsertUsuario(Usuario usuario)
         {
-            string SQL = "sp_InsertUsuario"
-            SQL += "VALUES(@pID_Usuario, @pnombre, @pemail, @pcontraseña, @pID_Viaje, @pFechaNacimiento)"
+            string SQL = "sp_InsertUsuario";
+            SQL += "VALUES(@pID_Usuario, @pnombre, @pemail, @pcontraseña, @pID_Viaje, @pFechaNacimiento)";
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 db.Execute(SQL, new

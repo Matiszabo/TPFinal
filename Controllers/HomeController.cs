@@ -19,44 +19,23 @@ public class HomeController : Controller
         return View("IniciarSesion");
     }
 
-    public IActionResult VerificarUsuario(Usuario usuario)
+    public bool VerificarSiExisteUsuario(Usuario U)
     {
-        if (VerificarSiExisteUsuario(usuario) == true)
-        {
-            Usuario usuario = BD.BuscarUsuarioXNombre(usuario.nombre);
-            if (usuario.contraseña == usuario.contraseña)
-            {
-                return RedirectToAction("PaginaPrincipal", "Home");
-            }
-            else
-            {
-                ViewBag.Mensaje = "La contraseña es incorrecta";
-                return View("IniciarSesion");
-            }
-        }
-        else
-        {
-            ViewBag.Mensaje = "El usuario no existe o es incorrecto";
-            return View("IniciarSesion");
-        }
+        return BD.BuscarUsuarioXNombre(U.nombre) != null;
     }
-    public bool VerificarSiExisteUsuario(Usuario usuario)
+    public IActionResult VerificarUsuarioRegistro(Usuario U, string Contraseña2)
     {
-        return BD.BuscarUsuarioXNombre(usuario.nombre) != null;
-    }
-    public IActionResult VerificarUsuarioRegistro(Usuario usuario, string Contraseña2)
-    {
-        if(VerificarSiExisteUsuario(usuario) == true)
+        if(VerificarSiExisteUsuario(U) == true)
         {
-            ViewBag.Mensaje = "El usuario ya existe, ingrese otro nombre";
+            ViewBag.Mensaje = "El U ya existe, ingrese otro nombre";
             return View("Registrarse");
         }
-        if(usuario.contraseña != Contraseña2)
+        if(U.contraseña != Contraseña2)
         {
             ViewBag.Mensaje = "Las contraseñas no coinciden";
             return View("Registrarse");
         }
-        BD.AgregarUsuario(usuario);
+        BD.InsertUsuario(U);
 
         return RedirectToAction("PaginaPrincipal", "Home");
     }
@@ -64,9 +43,9 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult OlvidoContraseña(Usuario usuario)
+    public IActionResult OlvidoContraseña(Usuario U)
     {
-        ViewBag.Usuario = BD.BuscarContraXUsuario(usuario.Nombre);
+        ViewBag.Usuario = BD.BuscarContraXUsuario(U.nombre);
         ViewBag.Mensaje = "La contraseña es: " + ViewBag.Usuario.Contraseña;
         return View();
     }
@@ -76,11 +55,11 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult InsertarUsuario(Usuario usuario, string Contraseña2)
+    public IActionResult InsertarUsuario(Usuario U, string Contraseña2, Viajes V)
     {
-        if (usuario.contraseña == Contraseña2)
+        if (U.contraseña == Contraseña2)
         {
-            BD.AgregarUsuario(usuario);
+            BD.InsertViaje(V);
             return RedirectToAction("PaginaPrincipal", "Home");
         }
         else

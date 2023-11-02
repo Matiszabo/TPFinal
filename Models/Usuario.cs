@@ -7,6 +7,6 @@ namespace Prac.Models
         public string email {get;set;}
         public string contraseña {get;set;}
         public int ID_Viaje { get;set;}
-        public date FechaNacimiento { get;set;}
+        public DateTime FechaNacimiento { get;set;}
     }    
 }

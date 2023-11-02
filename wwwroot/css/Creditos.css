@@ -1,17 +1,23 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #257202;
 }
 .card {
-    margin: 50px;
-    margin-top: 100px;
-    overflow: visible;
-    width: 190px;
-    height: 254px;
-    display: inline-block;
-  }
+  margin: 110px;
+  margin-top: 250px;
+ 
+  overflow: visible;
+  width: 190px;
+  height: 254px;
+  display: inline-block;
+  background: rgb(37,113,60);
+background: linear-gradient(90deg, rgba(37,113,60,1) 0%, rgba(40,161,49,1) 19%, rgba(51,209,52,1) 38%, rgba(53,194,53,1) 63%, rgba(40,218,40,1) 80%, rgba(37,186,25,1) 89%, rgba(36,131,36,1) 100%);
+
+}
+
   
   .content {
     width: 100%;
@@ -48,7 +54,7 @@ body {
     display: block;
     width: 160px;
     height: 160%;
-    background: linear-gradient(90deg, transparent, #ffcc00, #ffcc00, #ffcc00, #ffcc00, transparent);
+    background: linear-gradient(90deg, transparent, rgb(255, 255, 255), #ffffff, #ffffff, #fffffe, transparent);
     animation: rotation_481 5000ms infinite linear;
   }
   
@@ -56,9 +62,9 @@ body {
     position: absolute;
     width: 99%;
     height: 99%;
-    background-color: #151515;
+    background-color: #000000;
     border-radius: 5px;
-    color: white;
+    color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,6 +74,7 @@ body {
   
   .card:hover .content {
     transform: rotateY(180deg);
+    
   }
   
   @keyframes rotation_481 {
@@ -129,6 +136,8 @@ body {
     font-size: 8px;
   }
   
+
+
   .front .img {
     position: absolute;
     width: 100%;
@@ -145,6 +154,8 @@ body {
     position: relative;
     filter: blur(15px);
     animation: floating 2600ms infinite linear;
+    background: rgb(37,113,60);
+background: linear-gradient(90deg, rgba(37,113,60,1) 0%, rgba(40,161,49,1) 19%, rgba(51,209,52,1) 38%, rgba(53,194,53,1) 63%, rgba(40,218,40,1) 80%, rgba(37,186,25,1) 89%, rgba(36,131,36,1) 100%);
   }
   
   #bottom {
@@ -178,3 +189,5 @@ body {
       transform: translateY(0px);
     }
   }
+
+

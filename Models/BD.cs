@@ -9,6 +9,30 @@ namespace Prac.Models
     {
         private static string _connectionString = @"Server=localhost;DataBase=Wanderlust;Trusted_Connection=True;";
 
+        public static Usuario BuscarUsuario(Usuario usuario)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT * FROM Usuarios WHERE ID_Usuario = @usuario.ID_Usuario";
+                return db.QueryFirstOrDefault<Usuario>(sql);
+            }
+        }
+        public static Usuario BuscarUsuarioXNombre(string nombre)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT * FROM Usuarios WHERE nombre = @nombre";
+                return db.QueryFirstOrDefault<Usuario>(sql, new{ nombre = Nombre });
+            }
+        }
+        public static Usuario BuscarContraXUsuario(string nombre)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT contraseña FROM Usuarios WHERE nombre = @nombre";
+                return db.QueryFirstOrDefault<Usuario>(sql, new{ nombre = Nombre });
+            }
+        }
         public static List<Pais> SeleccionarPaises()
         {
             List<Pais> ListaPaises;
@@ -82,6 +106,6 @@ namespace Prac.Models
                 }
                 );
             }
-        }
+        }  
     }
 }

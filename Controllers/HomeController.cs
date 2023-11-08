@@ -19,58 +19,68 @@ public class HomeController : Controller
         return View("IniciarSesion");
     }
 
-     public IActionResult VerificarContraseña(string nombre, string contraseña)
+    public IActionResult IniciarSesion()
     {
-        if (string.IsNullOrEmpty(contraseña)  || string.IsNullOrEmpty(nombre) )
+        return View("IniciarSesion");
+    }
+    
+    public IActionResult VerificarContraseña(string Usuario, string Contraseña)
+    {
+        if (string.IsNullOrEmpty(Contraseña)  || string.IsNullOrEmpty(Usuario) )
         {
             ViewBag.Error = "Se deben completar todos los campos";
             return RedirectToAction("Index");
         }
         else
         {
-            Usuario comparar = BD.LoginIngresado(nombre, contraseña);
+            Usuario comparar = BD.LoginIngresado(Usuario, Contraseña);
         
+            Console.WriteLine("COntra ingresada: ", Contraseña);
             if (comparar != null)
             {
-                if (contraseña == comparar.contraseña)
+                if (Contraseña == comparar.contraseña)
                 {
                     return RedirectToAction("PaginaPrincipal", "Home", new {ID_Usuario=comparar.ID_Usuario});
                 }
             }
             else
             {
-                ViewBag.Verificar = "El usuario y/o contraseña ingresada son incorrectos";
+                ViewBag.Verificar = "El usuario y/o contraseña ingresada son incorrectos";  
             }
-            return View("Index");
+            return View("IniciarSesion");
         }
     }
+    
     public IActionResult Registrarse()
     {
         return View();
     }
+    
     public IActionResult OlvidoContraseña(Usuario U)
     {
         ViewBag.Usuario = BD.BuscarContraXUsuario(U.nombre);
         ViewBag.Mensaje = "La contraseña es: " + ViewBag.Usuario.Contraseña;
         return View();
     }
+    
     public IActionResult BuscarOlvidoContraseña()
     {
         return View("OlvidoContraseña");
     }
 
     [HttpPost]
-    public IActionResult InsertarUsuario(Usuario U, string Contraseña2, Viajes V)
+    
+    public IActionResult InsertarUsuario(Usuario nuevoUser, string Contraseña2)
     {
-        if (U.contraseña == Contraseña2)
+        if (nuevoUser.contraseña!= Contraseña2 || string.IsNullOrEmpty(nuevoUser.usuario) ||  string.IsNullOrEmpty(nuevoUser.contraseña) || string.IsNullOrEmpty(nuevoUser.nombre) || string.IsNullOrEmpty(nuevoUser.email) )
         {
-            BD.InsertViaje(V);
-            return RedirectToAction("PaginaPrincipal", "Home");
+            string alerta="No se compltaron todos los datos o las contraseñas ingresadas no coinciden";
+            return RedirectToAction("Registrarse" , "Home", new {error=alerta});
         }
         else
         {
-            ViewBag.Mensaje = "Las contraseñas no coinciden";
-            return View("Registrarse");
+            BD.InsertUsuario(nuevoUser);
+            return RedirectToAction("Index");
         }
     }
 

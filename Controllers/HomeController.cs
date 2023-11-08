@@ -19,25 +19,30 @@ public class HomeController : Controller
         return View("IniciarSesion");
     }
 
-    public bool VerificarSiExisteUsuario(Usuario U)
+     public IActionResult VerificarContraseña(string nombre, string contraseña)
     {
-        return BD.BuscarUsuarioXNombre(U.nombre) != null;
-    }
-    public IActionResult VerificarUsuarioRegistro(Usuario U, string Contraseña2)
-    {
-        if(VerificarSiExisteUsuario(U) == true)
+        if (string.IsNullOrEmpty(contraseña)  || string.IsNullOrEmpty(nombre) )
         {
-            ViewBag.Mensaje = "El U ya existe, ingrese otro nombre";
-            return View("Registrarse");
+            ViewBag.Error = "Se deben completar todos los campos";
+            return RedirectToAction("Index");
         }
-        if(U.contraseña != Contraseña2)
+        else
         {
-            ViewBag.Mensaje = "Las contraseñas no coinciden";
-            return View("Registrarse");
+            Usuario comparar = BD.LoginIngresado(nombre, contraseña);
+        
+            if (comparar != null)
+            {
+                if (contraseña == comparar.contraseña)
+                {
+                    return RedirectToAction("PaginaPrincipal", "Home", new {ID_Usuario=comparar.ID_Usuario});
+                }
+            }
+            else
+            {
+                ViewBag.Verificar = "El usuario y/o contraseña ingresada son incorrectos";
+            }
+            return View("Index");
         }
-        BD.InsertUsuario(U);
-
-        return RedirectToAction("PaginaPrincipal", "Home");
     }
     public IActionResult Registrarse()
     {

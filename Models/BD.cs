@@ -25,6 +25,16 @@ namespace Prac.Models
                 return db.QueryFirstOrDefault<Usuario>(sql, new{ pnombre = nombre });
             }
         }
+        public static Usuario LoginIngresado(string nombre, string contraseña)
+        {
+            Usuario Ingresado = new Usuario();
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string SQL = "SELECT * FROM Usuario WHERE nombre= @pNombre and contraseña= @pContraseña";
+                Ingresado = db.QueryFirstOrDefault<Usuario>(SQL, new { pNombre = nombre, pContraseña = contraseña});
+            }
+            return Ingresado;
+        }
         public static Usuario BuscarContraXUsuario(string nombre)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))

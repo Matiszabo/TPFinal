@@ -67,6 +67,12 @@ public class HomeController : Controller
         return View();
     }
     
+    public Viajes MostrarInfoDestinosAjax(int ID_Viaje)
+    {
+        ViewBag.ListaViajes= BD.SeleccionarViajesPorPais(ID_Viaje);
+        return ViewBag.ListaViajes;
+    }
+    
     public IActionResult OlvidoContraseña(Usuario U)
     {
         ViewBag.Usuario = BD.BuscarContraXUsuario(U.nombre);

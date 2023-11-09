@@ -6,13 +6,17 @@
 <h1>
 @foreach (Viajes item in ViewBag.ListaViajes)
 {
-    <div>
+    <div> 
         <p>@item.nombre</p>
         <p>@item.precio</p>
         <p>@item.imagen</p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalViaje" onclick="MostrarInfoDestinos(@item.ID_Viaje)">
+        Descripcion
+        </button>
         <p>@item.descripcion</p>
         <p>@item.puntaje</p>
     </div>
 }
  <a class="btn btn-info" href='@Url.Action("PaginaPrincipal","Home")'>Volver a Paises</a>
 
+<p>class="card" style="width: 18rem;"</p>

@@ -13,7 +13,7 @@ namespace Prac.Models
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT * FROM Usuarios WHERE ID_Usuario = @usuario.ID_Usuario";
+                string sql = "SELECT * FROM Usuario WHERE ID_Usuario = @usuario.ID_Usuario";
                 return db.QueryFirstOrDefault<Usuario>(sql);
             }
         }
@@ -21,7 +21,7 @@ namespace Prac.Models
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT * FROM Usuarios WHERE nombre = @pnombre";
+                string sql = "SELECT * FROM Usuario WHERE nombre = @pnombre";
                 return db.QueryFirstOrDefault<Usuario>(sql, new{ pnombre = nombre });
             }
         }
@@ -39,10 +39,22 @@ namespace Prac.Models
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT contraseña FROM Usuarios WHERE nombre = @pnombre";
+                string sql = "SELECT contraseña FROM Usuario WHERE nombre = @pnombre";
                 return db.QueryFirstOrDefault<Usuario>(sql, new{ pnombre = nombre });
             }
         }
+
+        public static Usuario usuarioElegido(int ID_Usuario)
+        {
+            Usuario Elegido = null;
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string SQL = "SELECT * FROM Usuario WHERE ID_Usuario= @pID_Usuario";
+                Elegido = db.QueryFirstOrDefault<Usuario>(SQL, new { pID_Usuario= ID_Usuario });
+            }
+            return Elegido;
+        }
+
         public static List<Pais> SeleccionarPaises()
         {
             List<Pais> ListaPaises;
@@ -59,27 +71,36 @@ namespace Prac.Models
             Viajes Elegido = null;
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string SQL = "SELECT * FROM Viajes WHERE Viajes.ID_Pais= @ID_Pais";
-                Elegido = db.QueryFirstOrDefault<Viajes>(SQL, new { pid= id });
+                string SQL = "SELECT * FROM Viajes WHERE ID_Pais= @pID_Pais";
+                Elegido = db.QueryFirstOrDefault<Viajes>(SQL, new { pID_Pais = id });
             }
             return Elegido;
         }
+
+        public static List<Usuario> SeleccionarUsuarios()
+        {
+            List<Usuario> ListaUsuarios;
+            using(SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT * FROM Alumnos";
+                ListaUsuarios = db.Query<Usuario>(sql).ToList();
+            }
+            return ListaUsuarios;
+        }
+        
         public static void InsertViaje(Viajes viaje)
         {
             string SQL = "sp_InsertViajes";
-            SQL += " VALUES (@pID_Viaje, @pnombre, @pprecio, @pimagen, @pdescripcion, @ppuntaje, @pID_Pais)";
-
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 db.Execute(SQL, new
                 {
-                    pID_Viaje = viaje.ID_Viaje,
-                    pnombre = viaje.nombre,
-                    pprecio = viaje.precio,
-                    pimagen = viaje.imagen,
-                    pdescripcion = viaje.descripcion,
-                    ppuntaje = viaje.puntaje,
-                    pID_Pais = viaje.ID_Pais
+                    nombre = viaje.nombre,
+                    precio = viaje.precio,
+                    imagen = viaje.imagen,
+                    descripcion = viaje.descripcion,
+                    puntaje = viaje.puntaje,
+                    ID_Pais = viaje.ID_Pais
                 }
                 );
             }
@@ -87,14 +108,12 @@ namespace Prac.Models
         public static void InsertPais(Pais pais)
         {
             string SQL = "sp_InsertPais";
-            SQL += "VALUES(@pID_Pais, @pnombre, @pDescripcion)";
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 db.Execute(SQL, new
                 {
-                    pID_Pais = pais.ID_Pais,
-                    pnombre = pais.nombre,
-                    pDescripcion = pais.Descripcion
+                    nombre = pais.nombre,
+                    Descripcion = pais.Descripcion
                 }
                 );
             }
@@ -102,17 +121,15 @@ namespace Prac.Models
         public static void InsertUsuario(Usuario usuario)
         {
             string SQL = "sp_InsertUsuario";
-            SQL += "VALUES(@pID_Usuario, @pnombre, @pemail, @pcontraseña, @pID_Viaje, @pFechaNacimiento)";
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 db.Execute(SQL, new
                 {
-                    pID_Usuario = usuario.ID_Usuario,
-                    pnombre = usuario.nombre,
-                    pemail = usuario.email,
-                    pcontraseña = usuario.contraseña,
-                    pID_Viaje = usuario.ID_Viaje,
-                    pFechaNacimiento = usuario.FechaNacimiento
+                    nombre = usuario.nombre,
+                    usuario = usuario.usuario,
+                    email = usuario.email,
+                    contraseña = usuario.contraseña,
+                    FechaNacimiento = usuario.FechaNacimiento
                 }
                 );
             }

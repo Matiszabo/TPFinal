@@ -21,7 +21,7 @@ public class HomeController : Controller
 
     public IActionResult IniciarSesion()
     {
-        return View("IniciarSesion");
+        return View();
     }
     
     public IActionResult VerificarContraseña(string Usuario, string Contraseña)
@@ -35,7 +35,7 @@ public class HomeController : Controller
         {
             Usuario comparar = BD.LoginIngresado(Usuario, Contraseña);
         
-            Console.WriteLine("COntra ingresada: ", Contraseña);
+            Console.WriteLine("Contra ingresada: ", Contraseña);
             if (comparar != null)
             {
                 if (Contraseña == comparar.contraseña)
@@ -50,7 +50,18 @@ public class HomeController : Controller
             return View("IniciarSesion");
         }
     }
-    
+    public IActionResult PaginaPrincipal()
+    {
+        ViewBag.ListaPais = BD.SeleccionarPaises();
+        return View();
+    }
+
+    public IActionResult VerViajesxPais(int id)
+    {
+        ViewBag.Viajes = BD.SeleccionarViajesPorPais(id);
+        return View();
+    }
+
     public IActionResult Registrarse()
     {
         return View();

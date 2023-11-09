@@ -1,0 +1,18 @@
+@using Prac.Models
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (Viajes item in ViewBag.Viajes)
+{
+    <div>
+        <p>@item.nombre</p>
+        <p>@item.precio</p>
+        <p>@item.imagen</p>
+        <p>@item.descripcion</p>
+        <p>@item.puntaje</p>
+    </div>
+ <a class="btn btn-info" href='@Url.Action("PaginaPrincipal","Home", new {ID_Pais = item.ID_Pais})'>Volver</a>
+
+}

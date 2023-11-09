@@ -66,17 +66,16 @@ namespace Prac.Models
             return ListaPaises;
         }
     
-        public static Viajes SeleccionarViajesPorPais(int id)
-        {
-            Viajes Elegido = null;
-            using (SqlConnection db = new SqlConnection(_connectionString))
+            public static List<Viajes> SeleccionarViajesPorPais(int id)
             {
-                string SQL = "SELECT * FROM Viajes WHERE ID_Pais= @pID_Pais";
-                Elegido = db.QueryFirstOrDefault<Viajes>(SQL, new { pID_Pais = id });
+                List<Viajes> ListaViajes;
+             using (SqlConnection db = new SqlConnection(_connectionString))
+             {
+              string SQL = "SELECT * FROM Viajes WHERE ID_Pais= @pID_Pais";
+               ListaViajes = db.Query<Viajes>(SQL, new { pID_Pais = id }).ToList();
+               }
+               return ListaViajes;
             }
-            return Elegido;
-        }
-
         public static List<Usuario> SeleccionarUsuarios()
         {
             List<Usuario> ListaUsuarios;

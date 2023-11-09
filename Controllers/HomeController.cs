@@ -56,9 +56,9 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult VerViajesxPais(int id)
+    public IActionResult VerViajesxPais(int ID_Pais)
     {
-        ViewBag.Viajes = BD.SeleccionarViajesPorPais(id);
+        ViewBag.ListaViajes = BD.SeleccionarViajesPorPais(ID_Pais);
         return View();
     }
 
@@ -78,7 +78,10 @@ public class HomeController : Controller
     {
         return View("OlvidoContraseña");
     }
-
+    public IActionResult Perfil()
+    {
+        return View();
+    }
     [HttpPost]
     
     public IActionResult InsertarUsuario(Usuario nuevoUser, string Contraseña2)

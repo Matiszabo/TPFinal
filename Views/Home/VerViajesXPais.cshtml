@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-@foreach (Viajes item in ViewBag.Viajes)
+<h1>
+@foreach (Viajes item in ViewBag.ListaViajes)
 {
     <div>
         <p>@item.nombre</p>
@@ -13,6 +13,6 @@
         <p>@item.descripcion</p>
         <p>@item.puntaje</p>
     </div>
- <a class="btn btn-info" href='@Url.Action("PaginaPrincipal","Home", new {ID_Pais = item.ID_Pais})'>Volver</a>
-
 }
+ <a class="btn btn-info" href='@Url.Action("PaginaPrincipal","Home")'>Volver a Paises</a>
+

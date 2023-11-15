@@ -13,3 +13,26 @@
         }
     });
 }
+
+function DarLike(idV, element) {
+    let h6CantLikes = element.parentNode.children[2];
+    let elementIsLiked = element.src.includes('CorazonBlanco.jpg');
+    $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        url: '/Home/LikesAjax',
+        data:
+        {
+            ID_Viaje: idV,
+            Likes: !elementIsLiked ? -1 : 1  // Cambiado de CantLikes a Likes
+        },
+        success: function (response) {
+            console.log(response);
+            if (elementIsLiked) element.src = '/CorazonRojo.jpg';
+            else element.src = '/CorazonBlanco.jpg';
+            h6CantLikes.innerText = response;
+        }
+    });
+}
+
+

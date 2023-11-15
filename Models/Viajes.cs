@@ -9,5 +9,6 @@ namespace Prac.Models
         public string descripcion { get;set;}
         public int puntaje { get;set;}        
         public int ID_Pais { get;set;}
+        public int Likes { get; set; }
     }
 }

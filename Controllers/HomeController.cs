@@ -94,6 +94,13 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpPost]
+    public int LikesAjax(int ID_Viaje, int Likes)
+    {
+        BD.AgregarLikes(ID_Viaje, Likes);
+        return BD.VerCantLikes(ID_Viaje);
+    }
+
 
     [HttpPost]
     

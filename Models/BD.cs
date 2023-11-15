@@ -147,6 +147,30 @@ namespace Prac.Models
                 }
                 );
             }
-        }  
+        }   
+        public static int AgregarLikes(int ID_Viaje, int Likes)
+        {
+            int registrosInsertados = 0;
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "UPDATE Viajes SET Likes = Likes + 1 WHERE ID_Viaje = @pID_Viaje";
+                registrosInsertados = db.Execute(sql, new { pID_Viaje = ID_Viaje, pcantLikes = Likes });
+            }
+            if (Likes == 1)
+            {
+                string SQL = "DELETE FROM LikesxUsuario WHERE IdUsuario";
+            }
+            return registrosInsertados;
+        }
+
+        public static int VerCantLikes(int ID_Viaje)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT CantLikes FROM Juegos WHERE ID_Viaje = @pID_Viaje";
+                return db.QueryFirstOrDefault<int>(sql, new { pID_Viaje = ID_Viaje });
+            }
+        }
+  
     }
 }

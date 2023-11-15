@@ -18,6 +18,10 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalViaje" onclick="MostrarInfoDestinosAjax(@item.ID_Viaje)">
                         Descripcion
                     </button>
+                    <p class="card-text">
+                            <h6 class="likes">@item.Likes</h6>
+                            <img id="BotonLike" class="corazon" src="/CorazonBlanco.jpg" height="25px" width="25px" onclick="Likes(@item.ID_Viaje, this)">
+                    </p>
                     <p>Puntaje: @item.puntaje</p>
                 </div>
             </div>

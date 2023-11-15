@@ -6,13 +6,18 @@
         data: { ID_Viaje: ID_V },
         success: function (response) {
             $("#DescripcionContainer").html(response);
-            $('#ModalViaje').modal('show'); // Para mostrar el modal después de cargar la información
+            // Wait for the description to be loaded before displaying the modal
+            $('#ModalViaje').on('shown.bs.modal', function () {
+                $(this).modal('hide');
+                $('#ModalViaje').modal('show');
+            });
         },
         error: function (error) {
             console.log(error);
         }
     });
 }
+
 
 function DarLike(idV, element) {
     let h6CantLikes = element.parentNode.children[2];
@@ -28,11 +33,12 @@ function DarLike(idV, element) {
         },
         success: function (response) {
             console.log(response);
-            if (elementIsLiked) element.src = '/CorazonRojo.jpg';
-            else element.src = '/CorazonBlanco.jpg';
+            element.attr('src', elementIsLiked ? '/CorazonRojo.jpg' : '/CorazonBlanco.jpg');
             h6CantLikes.innerText = response;
         }
     });
 }
+
+
 
 

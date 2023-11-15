@@ -76,8 +76,8 @@ public class HomeController : Controller
     
     public IActionResult OlvidoContraseña(Usuario U)
     {
-        ViewBag.Usuario = BD.BuscarContraXUsuario(U.nombre);
-        ViewBag.Mensaje = "La contraseña es: " + ViewBag.Usuario.Contraseña;
+        ViewBag.Contraseña = BD.BuscarContraXUsuario(U.nombre);
+        ViewBag.Mensaje = "La contraseña es: " + ViewBag.Contraseña;
         return View();
     }
     

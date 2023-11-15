@@ -1,17 +1,15 @@
-﻿function MostrarInfoDestinosAjax(ID_Viaje) {
-    $.ajax(
-        {
-            type: 'POST',
-            dataType: 'JSON',
-            url: '/Home/MostrarInfoDestinosAjax',
-            data: { ID_Viaje: ID_Viaje },
-            success: function (response) {
-                var contenido = "";
-                response.forEach(viaje => {
-                    contenido += "<li>" + viaje.nombre + "</li>";
-                });
-                $("#contenidoModal").html(contenido);
-            }            
+﻿function MostrarInfoDestinosAjax(ID_V) {
+    $.ajax({
+        type: 'POST',
+        dataType: 'html',
+        url: '/Home/MostrarInfoDestinosAjax',
+        data: { ID_Viaje: ID_V },
+        success: function (response) {
+            $("#DescripcionContainer").html(response);
+            $('#ModalViaje').modal('show'); // Para mostrar el modal después de cargar la información
+        },
+        error: function (error) {
+            console.log(error);
         }
-    )
+    });
 }

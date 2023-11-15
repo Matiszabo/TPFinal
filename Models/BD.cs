@@ -55,6 +55,21 @@ namespace Prac.Models
             return Elegido;
         }
 
+        public static List<Viajes> ObtenerViajesRealizados(int ID_Usuario)
+        {
+            List<Viajes> listaViajes;
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string SQL = "SELECT V.* " +
+                            "FROM Viajes V " +
+                            "JOIN Viajes_Elegidos VE ON V.ID_Viaje = VE.ID_Viaje " +
+                            "WHERE VE.ID_Usuario = @pID_Usuario";
+                listaViajes = db.Query<Viajes>(SQL, new { pID_Usuario = ID_Usuario }).ToList();
+            }
+            return listaViajes;
+        }
+
+
         public static List<Pais> SeleccionarPaises()
         {
             List<Pais> ListaPaises;
@@ -81,7 +96,7 @@ namespace Prac.Models
             List<Usuario> ListaUsuarios;
             using(SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT * FROM Alumnos";
+                string sql = "SELECT * FROM Usuario";
                 ListaUsuarios = db.Query<Usuario>(sql).ToList();
             }
             return ListaUsuarios;

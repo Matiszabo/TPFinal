@@ -3,13 +3,18 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<div class="row">
 @foreach (Pais item in ViewBag.ListaPais)
 {
-    <div >
-        <p>@item.nombre</p>
-        <p>@item.Descripcion</p>
-        <p>@item.imagen</p>
-    </div>
- <a class="btn btn-info" href='@Url.Action("VerViajesXPais","Home", new {ID_Pais = item.ID_Pais})'>Ver Pais</a>
+    <div class="col-md-3">
+        <div class="card bg-dark text-white w-100 mb-5">
+            <img src="@item.imagen" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title" style="min-height:75px;">@item.nombre</h5>
+                <p>@item.Descripcion</p>
+                 <a class="btn btn-info" href='@Url.Action("VerViajesXPais","Home", new {ID_Pais = item.ID_Pais})'>Ver Pais</a>
+             </div>
+        </div>
+    </div>   
 }
+</div>

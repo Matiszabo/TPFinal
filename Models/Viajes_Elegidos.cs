@@ -7,6 +7,7 @@ namespace Prac.Models
         public string precio { get;set;}
         public string imagen { get;set;}        
         public string descripcion { get;set;}
-        public int puntaje { get;set;}        
+        public int puntaje { get;set;}
+        public int ID_Usuario {get;set;}        
     }
 }

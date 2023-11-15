@@ -1,0 +1,45 @@
+@using Prac.Models
+
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<h1>Mi Perfil</h1>
+
+@if (ViewBag.Usuario != null)
+{
+    <div>
+        <h3>Datos de Usuario</h3>
+        <p><strong>Nombre:</strong> @ViewBag.Usuario.nombre</p>
+        <p><strong>Usuario:</strong> @ViewBag.Usuario.usuario</p>
+        <p><strong>Email:</strong> @ViewBag.Usuario.email</p>
+        <p><strong>Fecha de Nacimiento:</strong> @ViewBag.Usuario.FechaNacimiento.ToShortDateString()</p>
+    </div>
+}
+else
+{
+    <p>No se encontraron datos de usuario.</p>
+}
+
+<div>
+    <h3>Viajes Realizados</h3>
+    @if (ViewBag.ListaViajesRealizados != null && ViewBag.ListaViajesRealizados.Count > 0)
+    {
+        foreach (var viaje in ViewBag.ListaViajesRealizados)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@viaje.nombre</h5>
+                    <p class="card-text">Precio: $@viaje.precio</p>
+                    <!-- Agrega más detalles según sea necesario -->
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No hay viajes realizados.</p>
+    }
+</div>
+
+<a class="btn btn-info" href='@Url.Action("PaginaPrincipal", "Home")'>Volver a Página Principal</a>

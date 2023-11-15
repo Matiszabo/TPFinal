@@ -67,11 +67,12 @@ public class HomeController : Controller
         return View();
     }
     
-    public Viajes MostrarInfoDestinosAjax(int ID_Viaje)
+    public IActionResult MostrarInfoDestinosAjax(int ID_Viaje)
     {
-        ViewBag.ListaViajes= BD.SeleccionarViajesPorPais(ID_Viaje);
-        return ViewBag.ListaViajes;
+        Viajes viaje = BD.SeleccionarViajesPorPais(ID_Viaje).FirstOrDefault();
+        return PartialView("_DescripcionPartial", viaje);
     }
+
     
     public IActionResult OlvidoContraseña(Usuario U)
     {
@@ -84,10 +85,16 @@ public class HomeController : Controller
     {
         return View("OlvidoContraseña");
     }
-    public IActionResult Perfil()
+    public IActionResult Perfil(int ID_Usuario)
     {
+        Usuario usuario = BD.usuarioElegido(ID_Usuario);
+        List<Viajes> listaViajesRealizados = BD.ObtenerViajesRealizados(ID_Usuario);
+        ViewBag.Usuario = usuario;
+        ViewBag.ListaViajesRealizados = listaViajesRealizados;
         return View();
     }
+
+
     [HttpPost]
     
     public IActionResult InsertarUsuario(Usuario nuevoUser, string Contraseña2)

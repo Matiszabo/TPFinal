@@ -38,7 +38,3 @@ function DarLike(idV, element) {
         }
     });
 }
-
-
-
-

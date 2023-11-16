@@ -67,10 +67,11 @@ public class HomeController : Controller
         return View();
     }
     
-    public IActionResult MostrarInfoDestinosAjax(int ID_Viaje)
+    public Viajes MostrarInfoDestinosAjax(int ID_Viaje)
     {
-        Viajes viaje = BD.SeleccionarViajesPorPais(ID_Viaje).FirstOrDefault();
-        return PartialView("_DescripcionPartial", ID_Viaje);
+        Viajes viaje = BD.SeleccionarViajesPorPais(ID_Viaje);
+        return viaje;
+     //   return PartialView("_DescripcionPartial", ID_Viaje);
     }
     
     public IActionResult OlvidoContraseña(Usuario U)

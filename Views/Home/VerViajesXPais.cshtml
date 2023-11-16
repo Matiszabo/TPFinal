@@ -15,8 +15,9 @@
                 <div class="card-body">
                     <h5 class="card-title" style="min-height:75px;">@item.nombre</h5>
                     <p>$@item.precio</p>
-                    <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalViaje" onclick="MostrarInfoDestinosAjax(@item.ID_Viaje)">
-                        Descripcion
+                    <!-- data-bs-toggle="modal" data-bs-target="#ModalViaje"-->
+                    <button  type="button" class="btn btn-primary" onclick="MostrarInfoDestinosAjax(@item.ID_Viaje)">
+                        Descripcion 
                         <div id="DescripcionContainer">
                         </div>
                     </button>

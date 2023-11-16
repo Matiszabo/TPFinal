@@ -69,6 +69,10 @@ namespace Prac.Models
             return listaViajes;
         }
 
+        public static Viajes MostrarDescPorPais(int ID_Viaje)
+        {
+
+        }
 
         public static List<Pais> SeleccionarPaises()
         {

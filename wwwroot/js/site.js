@@ -1,25 +1,28 @@
-﻿function MostrarInfoDestinosAjax(ID_V) {
+﻿function MostrarInfoDestinosAjax(id) {
+    console.log(0);
+    
     $.ajax({
-        type: 'POST ',
+        url: '/Home/MostrarInfoDestinosAjax', 
+        type: 'GET',
         datatype: 'JSON',
-        url: '/Home/MostrarInfoDestinosAjax',
-        data: {ID_Viaje: IdV},
-        success: function (response) {
-            $("#DescripcionContainer").html(response.descripcion);
-            // Wait for the description to be loaded before displaying the modal
-            $('#ModalViaje').on('shown.bs.modal', function () {
-                $(this).modal('hide');
-                $('#ModalViaje').modal('show');
+        data: {ID_Viaje: id},
+        success: 
+        function (response) {
+            console.log(1)
+            contenido="";
+            response.forEach(Viaje => {
+                contenido += "<b>" + Viaje.descripcion + "</b>";
             });
-        },
-        error: function (error) {
-            console.log(error);
-        }
+            console.log(contenido)
+            $("#DescripcionContainer").html(contenido);
+        }     
+    
     });
-}
+    console.log(1);
+}   
 
 
-function DarLike(idV, element) {
+function DarLike(id, element) {
     let h6CantLikes = element.parentNode.children[2];
     let elementIsLiked = element.src.includes('CorazonBlanco.jpg');
     $.ajax({
@@ -28,7 +31,7 @@ function DarLike(idV, element) {
         url: '/Home/LikesAjax',
         data:
         {
-            ID_Viaje: idV,
+            ID_Viaje: id,
             Likes: !elementIsLiked ? -1 : 1  // Cambiado de CantLikes a Likes
         },
         success: function (response) {

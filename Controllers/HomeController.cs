@@ -70,9 +70,8 @@ public class HomeController : Controller
     public IActionResult MostrarInfoDestinosAjax(int ID_Viaje)
     {
         Viajes viaje = BD.SeleccionarViajesPorPais(ID_Viaje).FirstOrDefault();
-        return PartialView("_DescripcionPartial", viaje);
+        return PartialView("_DescripcionPartial", ID_Viaje);
     }
-
     
     public IActionResult OlvidoContraseña(Usuario U)
     {

@@ -1,11 +1,11 @@
 ﻿function MostrarInfoDestinosAjax(ID_V) {
     $.ajax({
-        type: 'POST',
-        dataType: 'html',
+        type: 'POST ',
+        datatype: 'JSON',
         url: '/Home/MostrarInfoDestinosAjax',
-        data: { ID_Viaje: ID_V },
+        data: {ID_Viaje: IdV},
         success: function (response) {
-            $("#DescripcionContainer").html(response);
+            $("#DescripcionContainer").html(response.descripcion);
             // Wait for the description to be loaded before displaying the modal
             $('#ModalViaje').on('shown.bs.modal', function () {
                 $(this).modal('hide');

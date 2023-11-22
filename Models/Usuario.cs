@@ -1,13 +1,36 @@
-namespace Prac.Models
+using System;
+
+namespace TPFinal.Models
 {
     public class Usuario
     {
-        public int ID_Usuario { get;set;}
-        public string nombre { get;set;}
-        public string usuario { get;set;}
-        public string email {get;set;}
-        public string contraseña {get;set;}
-        public int ID_Viaje { get;set;}
-        public DateTime FechaNacimiento { get;set;}
-    }    
+        private int _idUsuario;
+        private string _contraseña;
+        private string _nombre;
+
+        public Usuario(int IdUsuario, string Contraseña, string Nombre)
+        {
+            _idUsuario = IdUsuario;
+            _contraseña = Contraseña;
+            _nombre = Nombre;
+        }
+        public Usuario() { }
+        public int IdUsuario
+        {
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
+        }
+
+        public string Nombre
+        {
+            get { return _nombre; }
+            set { _nombre = value; }
+        }
+        public string Contraseña
+        {
+            get { return _contraseña; }
+            set { _contraseña = value; }
+        }
+
+    }
 }

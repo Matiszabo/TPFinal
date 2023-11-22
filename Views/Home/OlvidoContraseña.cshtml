@@ -1,4 +1,5 @@
 <div class="container">
+    <img class="imagenLogin" src="/Delta.png">
     <form class="formLogin" method="get" action='@Url.Action("OlvidoContraseña","Home")' enctype="multipart/form-data">
         <h1 class="text-white">Iniciar Sesión</h1>
         <input class="mb-3" type="text" name="Nombre" placeholder="Ingrese su usuario" required>
@@ -7,7 +8,7 @@
             Mostrar contraseña
         </button>
         <br>
-        <a href='@Url.Action("Index","Home")'>Iniciar Sesion</a>
+        <a style="color: white;" href='@Url.Action("Index","Home")'>Iniciar Sesion</a>
     </form>
     @if (ViewBag.Mensaje != null)
     {

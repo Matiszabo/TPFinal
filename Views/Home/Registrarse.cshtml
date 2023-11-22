@@ -1,32 +1,17 @@
 <div class="container">
-    <form id="formRegistro" asp-controller="Home" asp-action="InsertarUsuario" method="post">
-    <div class="form-group">
-            <label for="usuario">Usuario:</label>
-            <input type="text" class="form-control" id="usuario" name="usuario" required>
-    </div>
-    <div class="form-group">
-        <label for="contraseña">Contraseña:</label>
-        <input type="password" class="form-control" id="contraseña" name="contraseña" required>
-    </div>
-        <div class="form-group">
-        <label for="Contraseña">Ingrese nuevamente su contraseña:</label>
-        <input type="password" class="form-control" id="Contraseña2" name="Contraseña2" required>
-    </div>
-    <div class="form-group">
-        <label for="Nombre">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre">
-    </div>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email">
-    </div>
-    <div class="form-group">
-        <label for="FechaNacimiento">Fecha de Nacimiento:</label>
-        <input type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento">
-    </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
-
+    <img class="imagenLogin" src="/Delta.png">
+    <form class="formLogin" method="post" action='@Url.Action("VerificarUsuarioRegistro","Home")' enctype="multipart/form-data">
+        <h1 class="text-white">Registrarse</h1>
+        <input class="mb-3" type="text" name="Nombre" placeholder="Ingrese nombre usuario" required>
+        <br>
+        <input class="mb-3" type="password" name="Contraseña" placeholder="Ingrese contraseña" required>
+        <br>
+        <input class="mb-3" type="password" name="Contraseña2" placeholder="Confirme su contraseña" required>
+        <br>
+        <button class="mb-3 btn btn-primary" type="submit">
+            Ingresar
+        </button>
+    </form>
     @if(ViewBag.Mensaje!=null)
     {
         <div class="alert alert-danger" role="alert">

@@ -1,28 +1,20 @@
-﻿function MostrarInfoDestinosAjax(id) {
-    console.log(0);
-    
+﻿function MostrarMasInfo(idJ) {
     $.ajax({
-        url: '/Home/MostrarInfoDestinosAjax', 
-        type: 'GET',
-        datatype: 'JSON',
-        data: {ID_Viaje: id},
-        success: 
-        function (response) {
-            console.log(1)
-            contenido="";
-            response.forEach(Viaje => {
-                contenido += "<b>" + Viaje.descripcion + "</b>";
-            });
-            console.log(contenido)
-            $("#DescripcionContainer").html(contenido);
-        }     
-    
-    });
-    console.log(1);
-}   
+        type: 'POST',
+        dataType: 'JSON',
+        url: '/Home/MostrarMasInfoAjax',
+        data: { IdJuego: idJ },
+        success: function (response) {
+            console.log(response);
+            $("#FechaCreacion").html("Fecha de lanzamiento: " + response.fechaCreacion.substr(0, response.fechaCreacion.length - 10));
+            $("#Descripcion").html(response.descripcion);
+            $("#Precio").html("Precio: " + response.precio + "USD");
+        }
 
+    })
+}
 
-function DarLike(id, element) {
+function Likes(idJ, element) {
     let h6CantLikes = element.parentNode.children[2];
     let elementIsLiked = element.src.includes('CorazonBlanco.jpg');
     $.ajax({
@@ -31,13 +23,30 @@ function DarLike(id, element) {
         url: '/Home/LikesAjax',
         data:
         {
-            ID_Viaje: id,
-            Likes: !elementIsLiked ? -1 : 1  // Cambiado de CantLikes a Likes
+            IdJuego: idJ,
+            CantLikes: !elementIsLiked ? -1 : 1 
         },
         success: function (response) {
             console.log(response);
-            element.attr('src', elementIsLiked ? '/CorazonRojo.jpg' : '/CorazonBlanco.jpg');
+            if (elementIsLiked) element.src = '/CorazonRojo.jpg';
+            else element.src = '/CorazonBlanco.jpg';
             h6CantLikes.innerText = response;
         }
-    });
+
+    })
+    //console.log(element);
+}
+
+function CrearCuenta() {
+    $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        url: '/Home/CrearCuentaAjax',
+        //data: { IdUsuario: idU },
+        success: function (response) {
+            let content = "Nombre de usuario: <input type='text' class='play' id='player' name='Nombre' placeholder='Ingrese su nombre'></input>"
+            $("#CrearCuenta").html(content);
+        }
+
+    })
 }

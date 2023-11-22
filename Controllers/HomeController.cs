@@ -1,130 +1,162 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TPFinal.Models;
-using Prac.Models;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 namespace TPFinal.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private IWebHostEnvironment Environment;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IWebHostEnvironment environment)
     {
-        _logger = logger;
+        Environment = environment;
     }
 
     public IActionResult Index()
     {
         return View("IniciarSesion");
     }
+    public IActionResult VerificarUsuario(Usuario U)
+    {
 
-    public IActionResult IniciarSesion()
-    {
-        return View();
-    }
-    
-    public IActionResult VerificarContraseña(string Usuario, string Contraseña)
-    {
-        if (string.IsNullOrEmpty(Contraseña)  || string.IsNullOrEmpty(Usuario) )
+        if (VerificarSiExisteUsuario(U) == true)
         {
-            ViewBag.Error = "Se deben completar todos los campos";
-            return RedirectToAction("Index");
-        }
-        else
-        {
-            Usuario comparar = BD.LoginIngresado(Usuario, Contraseña);
-        
-            Console.WriteLine("Contra ingresada: ", Contraseña);
-            if (comparar != null)
+            Usuario usuarioBD = BD.BuscarUsuarioXNombre(U.Nombre);
+            if (usuarioBD.Contraseña == U.Contraseña)
             {
-                if (Contraseña == comparar.contraseña)
-                {
-                    return RedirectToAction("PaginaPrincipal", "Home", new {ID_Usuario=comparar.ID_Usuario});
-                }
+                return RedirectToAction("PaginaPrincipal", "Home");
+
             }
             else
             {
-                ViewBag.Verificar = "El usuario y/o contraseña ingresada son incorrectos";  
+                ViewBag.Mensaje = "La contraseña es incorrecta";
+                return View("IniciarSesion");
             }
+        }
+        else
+        {
+            ViewBag.Mensaje = "El usuario no existe o es incorrecto";
             return View("IniciarSesion");
         }
     }
-    public IActionResult PaginaPrincipal()
-    {
-        ViewBag.ListaPais = BD.SeleccionarPaises();
-        return View();
-    }
 
-    public IActionResult VerViajesxPais(int ID_Pais)
+    public bool VerificarSiExisteUsuario(Usuario U)
     {
-        ViewBag.ListaViajes = BD.SeleccionarViajesPorPais(ID_Pais);
-        return View();
+        return BD.BuscarUsuarioXNombre(U.Nombre) != null;
     }
+    public IActionResult VerificarUsuarioRegistro(Usuario U, string Contraseña2)
+    {
 
+        if(VerificarSiExisteUsuario(U) == true)
+        {
+            ViewBag.Mensaje = "El usuario ya existe, ingrese otro nombre";
+            return View("Registrarse");
+        }
+        if(U.Contraseña != Contraseña2)
+        {
+            ViewBag.Mensaje = "Las contraseñas no coinciden";
+            return View("Registrarse");
+        }
+        BD.AgregarUsuario(U);
+
+        return RedirectToAction("PaginaPrincipal", "Home");
+    }
     public IActionResult Registrarse()
     {
         return View();
     }
-    
-    public Viajes MostrarInfoDestinosAjax(int ID_Viaje)
-    {
-        Viajes viaje = BD.SeleccionarViajesPorPais(ID_Viaje);
-        return viaje;
-     //   return PartialView("_DescripcionPartial", ID_Viaje);
-    }
-    
     public IActionResult OlvidoContraseña(Usuario U)
     {
-        ViewBag.Contraseña = BD.BuscarContraXUsuario(U.nombre);
-        ViewBag.Mensaje = "La contraseña es: " + ViewBag.Contraseña;
+        ViewBag.Usuario = BD.BuscarContraXUsuario(U.Nombre);
+        ViewBag.Mensaje = "La contraseña es: " + ViewBag.Usuario.Contraseña;
         return View();
     }
-    
-    public IActionResult BuscarOlvidoContraseña()
+        public IActionResult BuscarOlvidoContraseña()
     {
         return View("OlvidoContraseña");
     }
-    public IActionResult Perfil(int ID_Usuario)
-    {
-        Usuario usuario = BD.usuarioElegido(ID_Usuario);
-        List<Viajes> listaViajesRealizados = BD.ObtenerViajesRealizados(ID_Usuario);
-        ViewBag.Usuario = usuario;
-        ViewBag.ListaViajesRealizados = listaViajesRealizados;
-        return View();
-    }
-
     [HttpPost]
-    public int LikesAjax(int ID_Viaje, int Likes)
+    public IActionResult InsertarUsuario(Usuario U, string Contraseña2)
     {
-        BD.AgregarLikes(ID_Viaje, Likes);
-        return BD.VerCantLikes(ID_Viaje);
-    }
-
-
-    [HttpPost]
-    
-    public IActionResult InsertarUsuario(Usuario nuevoUser, string Contraseña2)
-    {
-        if (nuevoUser.contraseña!= Contraseña2 || string.IsNullOrEmpty(nuevoUser.usuario) ||  string.IsNullOrEmpty(nuevoUser.contraseña) || string.IsNullOrEmpty(nuevoUser.nombre) || string.IsNullOrEmpty(nuevoUser.email) )
+        if (U.Contraseña == Contraseña2)
         {
-            string alerta="No se compltaron todos los datos o las contraseñas ingresadas no coinciden";
-            return RedirectToAction("Registrarse" , "Home", new {error=alerta});
+            BD.AgregarUsuario(U);
+            return RedirectToAction("PaginaPrincipal", "Home");
         }
         else
         {
-            BD.InsertUsuario(nuevoUser);
-            return RedirectToAction("Index");
+            ViewBag.Mensaje = "Las contraseñas no coinciden";
+            return View("Registrarse");
         }
     }
 
-    public IActionResult Creditos()
+    public IActionResult PaginaPrincipal()
+    {
+        ViewBag.listaJuegos = BD.TraerJuegos();
+
+        return View("Index");
+    }
+    public IActionResult ComprarJuego()
     {
         return View();
     }
-    public IActionResult Privacy()
+    public Juego MostrarJuegosAjax(int IdJuego)
     {
+        return BD.verInfoJuego(IdJuego);
+    }
+
+    public IActionResult AgregarJuego(int IdJuego)
+    {
+        ViewBag.listaCategorias = BD.TraerCategorias();
+        ViewBag.Juego = IdJuego;
         return View();
+    }
+    public IActionResult GuardarJuego(Juego Jue, IFormFile Imagen)
+    {
+        if (Imagen.Length > 0)
+        {
+            string wwwRootLocal = this.Environment.ContentRootPath + @"\wwwroot\" + Imagen.FileName;
+            using (var stream = System.IO.File.Create(wwwRootLocal))
+            {
+                Imagen.CopyTo(stream);
+            }
+            Jue.Imagen = Imagen.FileName;
+        }
+        BD.AgregarJuego(Jue);
+        ViewBag.detalleJuegos = BD.verInfoJuego(Jue.IdJuego);
+        ViewBag.listaJuegos = BD.TraerJuegos();
+        return RedirectToAction("PaginaPrincipal", "Home");
+    }
+
+    public Juego MostrarMasInfoAjax(int IdJuego)
+    {
+        return BD.verInfoJuego(IdJuego);
+    }
+
+    //Retorna la nueva cantidad de likes
+    [HttpPost]
+    public int LikesAjax(int IdJuego, int cantLikes)
+    {
+        BD.AgregarLikes(IdJuego, cantLikes);
+        return BD.VerCantLikes(IdJuego);
+    }
+
+    public IActionResult CrearCuentaAjax(Usuario usuario)
+    {
+        BD.AgregarUsuario(usuario);
+        //no se que poner
+        return View("Index");
+
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

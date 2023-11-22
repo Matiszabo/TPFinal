@@ -1,5 +1,24 @@
-<body>
-    <div class="container">
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <style>
+        body {
+            background-color: #71cedaab;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="body-style">
+    <div class="page-container">
+        <div class="container formulario-pago">
         <form action='@Url.Action("PaginaPrincipal","Home")' style="margin-top: 10%;" onsubmit="alert('Gracias por su compra')" >
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -45,4 +64,6 @@
             <button class="btn btn-success" type="submit" style="margin-bottom: 5px;">PAGAR</button>
         </form>
     </div>
+    </div>
 </body>
+</html>

@@ -21,14 +21,15 @@ body {
   background-attachment: fixed;
   background-repeat: repeat;
 }
-
 .NuevoJuego {
   position: absolute;
   top: 39%;
   left: 44.5%;
   width: 10%;
 }
-
+.iniciosesion{
+  background-color: #71cedaab;
+}
 
 .formLogin h1 {
   color: #333; 
@@ -136,10 +137,24 @@ body {
   margin-bottom: 0;
 }
 
+.formulario{
+  background-image: url("/img/Fondo.jpg");
+}
 
 
 
 
+
+/* comprar */
+
+
+.custom-info {
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  padding: 10px; /* Espaciado interior */
+  border-radius: 5px; /* Bordes redondeados, ajusta según sea necesario */
+  margin-bottom: 10px; /* Espaciado inferior */
+}
 
 
 

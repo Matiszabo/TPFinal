@@ -6,12 +6,12 @@
         data: { IdJuego: idJ },
         success: function (response) {
             console.log(response);
-            $("#FechaCreacion").html("Fecha de lanzamiento: " + response.fechaCreacion.substr(0, response.fechaCreacion.length - 10));
-            $("#Descripcion").html(response.descripcion);
+            $("#FechaCreacion").html("Fecha de lanzamiento: " + response.fechaCreacion.substr(0, response.fechaCreacion.length - 10)).addClass("custom-info");
+            $("#Descripcion").html(response.descripcion).addClass("custom-info");
         }
-
-    })
+    });
 }
+
 
 function Likes(idJ, element) {
     let h6CantLikes = element.parentNode.children[2];

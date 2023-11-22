@@ -1,31 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
 
-<form class="formAgr" method="POST" action='@Url.Action("GuardarJuego","Home")' enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Nombre</label>
-        <input type="text" class="form-control" name="nombre" aria-describedby="emailHelp">
-        <div class="mb-3">
-            <br>
-            <label for="exampleInputEmail1" class="form-label">Categoría</label>
-            <select class="form-select" aria-label="Default select example" name="fkCategoria">
-                    @foreach(Categoria cat in @ViewBag.listaCategorias)
-                    {
-                   <option value="1">"@cat.TipoCategoria"</option>
-                   }
-            </select>
-            <br>
-            <label for="exampleInputEmail1" class="form-label">Descripcion</label>
-            <input type="text" class="form-control" name="Descripcion" aria-describedby="emailHelp" required>
-            <br>
-            <label for="exampleInputEmail1" class="form-label">Imagen</label>
-            <input type="file" class="form-control" name="Imagen" aria-describedby="emailHelp" required>
-            <br>
-            <label for="exampleInputEmail1" class="form-label">Fecha de creación del juego</label>
-            <input type="date" class="form-control" name="FechaCreacion" aria-describedby="emailHelp" required>
-            <br>
-            <label for="exampleInputEmail1" class="form-label">Precio</label>
-            <input type="number" class="form-control" name="Precio" aria-describedby="emailHelp" required>
-            <br>
-            <input type="submit" class="btn btn-primary" value="Guardar Juego">
-        </div>
-    </div>
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <style>
+        body {
+            background-image: url('/img/Fondo.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+    </style>
+</head>
+    <body>
+        <form class="formAgr" method="POST" action='@Url.Action("GuardarJuego","Home")' enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" aria-describedby="emailHelp">
+                <div class="mb-3">
+                    <br>
+                    <label for="exampleInputEmail1" class="form-label">Categoría</label>
+                    <select class="form-select" aria-label="Default select example" name="fkCategoria">
+                            @foreach(Categoria cat in @ViewBag.listaCategorias)
+                            {
+                        <option value="1">"@cat.TipoCategoria"</option>
+                        }
+                    </select>
+                    <br>
+                    <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+                    <input type="text" class="form-control" name="Descripcion" aria-describedby="emailHelp" required>
+                    <br>
+                    <label for="exampleInputEmail1" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" name="Imagen" aria-describedby="emailHelp" required>
+                    <br>
+                    <label for="exampleInputEmail1" class="form-label">Fecha de creación del juego</label>
+                    <input type="date" class="form-control" name="FechaCreacion" aria-describedby="emailHelp" required>
+                    <br>
+                    <label for="exampleInputEmail1" class="form-label">Precio</label>
+                    <input type="number" class="form-control" name="Precio" aria-describedby="emailHelp" required>
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Guardar Juego">
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

@@ -47,30 +47,34 @@ namespace TPFinal.Models
             }
             return juegoActual;
         }
-        public static void AgregarJuego(Juego Jug)
+        public static void AgregarJuegoSP(Juego Jug)
         {
-            int registrosInsertados = 0;
-            string sql = "INSERT INTO Juegos(Nombre, CantLikes, Descripcion, FechaCreacion, Imagen, Precio, fkCategoria) VALUES(@Nombre, @CantLikes, @Descripcion, @FechaCreacion, @Imagen, @Precio, @fkCategoria)";
-
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                db.Execute(sql, new { Nombre = Jug.Nombre, CantLikes = Jug.CantLikes, Descripcion = Jug.Descripcion, FechaCreacion = Jug.FechaCreacion, Imagen = Jug.Imagen, Precio = Jug.Precio, fkCategoria = Jug.fkCategoria });
+                db.Execute("sp_AgregarJuego", new
+                {
+                    Nombre = Jug.Nombre,
+                    CantLikes = Jug.CantLikes,
+                    Descripcion = Jug.Descripcion,
+                    FechaCreacion = Jug.FechaCreacion,
+                    Imagen = Jug.Imagen,
+                    Precio = Jug.Precio,
+                    fkCategoria = Jug.fkCategoria
+                }, commandType: CommandType.StoredProcedure);
             }
         }
 
-        public static int AgregarLikes(int idJ, int cantLikes)
+        public static int ActualizarLikesJuegoSP(int idJuego, int cantLikes)
         {
-            int registrosInsertados = 0;
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "UPDATE Juegos SET CantLikes = (CantLikes + @pcantLikes) WHERE IdJuego = @pidJuego";
-                registrosInsertados = db.Execute(sql, new { pIdJuego = idJ, pcantLikes = cantLikes });
+                string idJuegoStr = idJuego.ToString();
+                return db.Execute("sp_ActualizarLikesJuego", new
+                {
+                    IdJuego = idJuegoStr,
+                    CantLikes = cantLikes
+                }, commandType: CommandType.StoredProcedure);
             }
-            if (cantLikes == 1)
-            {
-                string SQL = "DELETE FROM LikesxUsuario WHERE IdUsuario";
-            }
-            return registrosInsertados;
         }
 
         public static int VerCantLikes(int idJ)
@@ -82,15 +86,16 @@ namespace TPFinal.Models
             }
         }
 
-        public static int AgregarUsuario(Usuario usuario)
+        public static int AgregarUsuarioSP(Usuario usuario)
         {
-            int registrosInsertados = 0;
-            string sql = "INSERT INTO Usuarios(Contraseña, Nombre) VALUES(@Contraseña, @Nombre)";
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                registrosInsertados = db.Execute(sql, new { Contraseña = usuario.Contraseña, Nombre = usuario.Nombre });
+                return db.Execute("sp_AgregarUsuario", new
+                {
+                    Contraseña = usuario.Contraseña,
+                    Nombre = usuario.Nombre
+                }, commandType: CommandType.StoredProcedure);
             }
-            return registrosInsertados;
         }
         public static Usuario BuscarUsuario(Usuario U)
         {

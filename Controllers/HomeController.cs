@@ -67,7 +67,7 @@ public class HomeController : Controller
             ViewBag.Mensaje = "Las contraseñas no coinciden";
             return View("Registrarse");
         }
-        BD.AgregarUsuario(U);
+        BD.AgregarUsuarioSP(U);
 
         return RedirectToAction("PaginaPrincipal", "Home");
     }
@@ -90,7 +90,7 @@ public class HomeController : Controller
     {
         if (U.Contraseña == Contraseña2)
         {
-            BD.AgregarUsuario(U);
+            BD.AgregarUsuarioSP(U);
             return RedirectToAction("PaginaPrincipal", "Home");
         }
         else
@@ -132,7 +132,7 @@ public class HomeController : Controller
             }
             Jue.Imagen = Imagen.FileName;
         }
-        BD.AgregarJuego(Jue);
+        BD.AgregarJuegoSP(Jue);
         ViewBag.detalleJuegos = BD.verInfoJuego(Jue.IdJuego);
         ViewBag.listaJuegos = BD.TraerJuegos();
         return RedirectToAction("PaginaPrincipal", "Home");
@@ -147,13 +147,13 @@ public class HomeController : Controller
     [HttpPost]
     public int LikesAjax(int IdJuego, int cantLikes)
     {
-        BD.AgregarLikes(IdJuego, cantLikes);
+        BD.ActualizarLikesJuegoSP(IdJuego, cantLikes);
         return BD.VerCantLikes(IdJuego);
     }
 
     public IActionResult CrearCuentaAjax(Usuario usuario)
     {
-        BD.AgregarUsuario(usuario);
+        BD.AgregarUsuarioSP(usuario);
         //no se que poner
         return View("Index");
 

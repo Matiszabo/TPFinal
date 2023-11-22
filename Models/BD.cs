@@ -15,8 +15,7 @@ namespace TPFinal.Models
 {
     public class BD
     {
-        private static string _connectionString = @"Server=A-PHZ2-CIDI-019; DataBase=CuboGames;Trusted_Connection=True;";
-
+        private static string _connectionString = @"Server=localhost;DataBase=CuboGames;Trusted_Connection=True;";
         private static List<Juego> listaJuegos = new List<Juego>();
         private static List<Categoria> listaCategorias = new List<Categoria>();
 

@@ -43,8 +43,9 @@
                         <div class="card-body">
                             <h5 class="card-title" style="min-height:75px;">@item.Nombre</h5>
                             <p class="card-text">
+                            <p>Precio: US$@item.Precio</p>
                             <h6 class="likes">@item.CantLikes</h6>
-                            <img id="BotonLike" class="corazon" src="/CorazonBlanco.jpg" onclick="Likes(@item.IdJuego, this)">
+                            <img id="BotonLike" class="corazon" src="/CorazonBlanco.jpg" oncslick="Likes(@item.IdJuego, this)">
                             </p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalJuego"
                             onclick="MostrarMasInfo(@item.IdJuego)">

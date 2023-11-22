@@ -30,55 +30,12 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-.inicio {
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ajusta la altura según tus necesidades */
-}
-
-.formLogin {
-  background-color: #fff; /* Fondo blanco para el formulario */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  text-align: center;
-  width: 300px; /* Ajusta el ancho del formulario según tus necesidades */
-}
-
 .formLogin h1 {
-  color: #333; /* Color del texto del título */
+  color: #333; 
 }
 
 .formLogin input {
-  width: 100%;
+  width: 50%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -86,25 +43,98 @@ html, body {
   box-sizing: border-box;
 }
 
+
 .formLogin button {
-  width: 100%;
+  width: 40%;
   padding: 10px;
   background-color: #4CAF50; /* Color de fondo del botón */
   color: #fff; /* Color del texto del botón */
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Agregamos transiciones para suavizar los cambios */
 }
 
-.formLogin a {
-  color: #333; /* Color del texto del enlace */
-  text-decoration: none;
+
+
+.formLogin button:hover {
+  background-color: #45a049; /* Cambiamos el color de fondo en hover */
+  transform: scale(1.1); /* Hacemos el botón un 10% más grande en hover */
 }
 
-.formLogin a:hover {
-  text-decoration: underline; /* Subrayar en hover */
+
+
+/* agregar juego */
+
+
+.formAgr {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.formAgr label {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.formAgr input,
+.formAgr select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.formAgr input[type="file"] {
+  padding: 8px;
+}
+
+.formAgr input[type="submit"] {
+  background-color: #3498db;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.formAgr input[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+.formAgr .error {
+  color: #e74c3c;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Estilo para el contenedor de la fecha */
+.formAgr .fecha-container {
+  display: flex;
+  gap: 10px;
+}
+
+/* Estilo para el contenedor de la imagen */
+.formAgr .imagen-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Estilo para la etiqueta de la imagen */
+.formAgr .imagen-container label {
+  margin-bottom: 0;
+}
 
 
 

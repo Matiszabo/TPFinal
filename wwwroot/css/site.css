@@ -8,10 +8,6 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -19,4 +15,176 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: url(/fondo.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+}
+
+.NuevoJuego {
+  position: absolute;
+  top: 39%;
+  left: 44.5%;
+  width: 10%;
+}
+
+
+.likes {
+  font-size: medium;
+  margin-bottom: -11%;
+  margin-left: 12%;
+}
+
+.corazon {
+  width: 10%;
+  height: 12%;
+}
+
+.masInfo{
+  margin-top: 5%;
+}
+.buttonCerrar {
+  margin-right: 34%;
+  width: 150px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+.buttonCerrar .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.buttonCerrar .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonCerrar svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.buttonCerrar:hover {
+  background: #ff3636;
+}
+
+.buttonCerrar:hover .text {
+  color: transparent;
+}
+
+.buttonCerrar:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.buttonCerrar:focus {
+  outline: none;
+}
+
+.buttonCerrar:active .icon svg {
+  transform: scale(0.8);
+}
+
+.buttonComprar {
+  width: 150px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: #04ca0e;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #04ca0e;
+}
+
+.buttonComprar,
+.buttonComprar span,
+.buttonCerrar,
+.buttonCerrar span {
+  transition: 400ms;
+}
+
+.buttonComprar .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.buttonComprar .icon {
+  position: absolute;
+  border-left: 1px solid #09a711;
+  transform: translateX(110px);
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonComprar svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.buttonComprar:hover {
+  background: #09a711;
+}
+
+.buttonComprar:hover .text {
+  color: transparent;
+}
+
+.buttonComprar:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.buttonComprar:focus {
+  outline: none;
+}
+
+.buttonComprar:active .icon svg {
+  transform: scale(0.8);
+}
+
+.formLogin {
+  margin-left: 30%;
+  width: 40%;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(52,52,52,1) 24%, rgba(0,176,234,1) 100%);
+  /*background: rgb(242,242,242);
+    background: linear-gradient(90deg, rgba(242,242,242,1) 0%, rgba(208,208,233,1) 35%, rgba(185,229,238,1) 100%);*/
+  text-align: center;
+}
+
+.imagenLogin {
+  margin-top: 10%;
+  margin-left: 30%;
+  width: 40%;
+}
+
+.CS{
+  position: absolute;
+  bottom: 96%;
+  right: 8%;
+  color: #eee;
 }

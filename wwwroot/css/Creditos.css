@@ -3,18 +3,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #257202;
+    background-color: #71cedaab;
 }
 .card {
-  margin: 110px;
-  margin-top: 250px;
- 
-  overflow: visible;
+  margin: 80px;
   width: 190px;
   height: 254px;
   display: inline-block;
-  background: rgb(37,113,60);
-background: linear-gradient(90deg, rgba(37,113,60,1) 0%, rgba(40,161,49,1) 19%, rgba(51,209,52,1) 38%, rgba(53,194,53,1) 63%, rgba(40,218,40,1) 80%, rgba(37,186,25,1) 89%, rgba(36,131,36,1) 100%);
+  background: rgb(37, 95, 113);
+background: linear-gradient(90deg, rgb(16, 93, 165) 0%, rgb(58, 194, 228) 19%, rgb(51, 138, 209) 38%, rgb(53, 142, 194) 63%, rgb(40, 206, 218) 80%, rgb(25, 100, 186) 89%, rgb(36, 88, 131) 100%);
 
 }
 
@@ -154,8 +151,8 @@ background: linear-gradient(90deg, rgba(37,113,60,1) 0%, rgba(40,161,49,1) 19%, 
     position: relative;
     filter: blur(15px);
     animation: floating 2600ms infinite linear;
-    background: rgb(37,113,60);
-background: linear-gradient(90deg, rgba(37,113,60,1) 0%, rgba(40,161,49,1) 19%, rgba(51,209,52,1) 38%, rgba(53,194,53,1) 63%, rgba(40,218,40,1) 80%, rgba(37,186,25,1) 89%, rgba(36,131,36,1) 100%);
+    background: rgb(37, 98, 113);
+background: linear-gradient(90deg, rgb(37, 102, 113) 0%, rgb(40, 78, 161) 19%, rgb(51, 204, 209) 38%, rgb(53, 131, 194) 63%, rgb(40, 182, 218) 80%, rgb(25, 186, 178) 89%, rgb(36, 46, 131) 100%);
   }
   
   #bottom {

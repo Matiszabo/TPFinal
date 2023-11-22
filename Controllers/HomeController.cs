@@ -26,6 +26,10 @@ public class HomeController : Controller
     {
         return View("IniciarSesion");
     }
+    public IActionResult Creditos()
+    {
+        return View();
+    }
     public IActionResult VerificarUsuario(Usuario U)
     {
 

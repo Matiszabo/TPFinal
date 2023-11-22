@@ -30,6 +30,113 @@ body {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.inicio {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajusta la altura según tus necesidades */
+}
+
+.formLogin {
+  background-color: #fff; /* Fondo blanco para el formulario */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center;
+  width: 300px; /* Ajusta el ancho del formulario según tus necesidades */
+}
+
+.formLogin h1 {
+  color: #333; /* Color del texto del título */
+}
+
+.formLogin input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.formLogin button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50; /* Color de fondo del botón */
+  color: #fff; /* Color del texto del botón */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formLogin a {
+  color: #333; /* Color del texto del enlace */
+  text-decoration: none;
+}
+
+.formLogin a:hover {
+  text-decoration: underline; /* Subrayar en hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .likes {
   font-size: medium;
   margin-bottom: -11%;

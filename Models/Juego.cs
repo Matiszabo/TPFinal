@@ -10,6 +10,8 @@ namespace TPFinal.Models
         private string _descripcionJuego;
         private DateTime _fechaCreacion;
         private string _imagen;
+        public List<Usuario> UsuariosQueDieronLike { get; set; }
+        public List<JuegoUsuarioLikes> Likes { get; set; }
 
         private int _precio;
 

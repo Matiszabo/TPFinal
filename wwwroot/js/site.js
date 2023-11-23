@@ -13,7 +13,7 @@
 }
 
 
-function Likes(idJ, element) {
+function Likes(idJ, element, IdUsuario) {
     let h6CantLikes = element.parentNode.children[2];
     let elementIsLiked = element.src.includes('CorazonBlanco.jpg');
     $.ajax({
@@ -31,9 +31,7 @@ function Likes(idJ, element) {
             else element.src = '/CorazonBlanco.jpg';
             h6CantLikes.innerText = response;
         }
-
     })
-    //console.log(element);
 }
 
 function CrearCuenta() {

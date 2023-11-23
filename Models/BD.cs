@@ -83,7 +83,6 @@ namespace TPFinal.Models
                 }, commandType: CommandType.StoredProcedure);
             }
         }
-
         public static int VerCantLikes(int idJ)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))

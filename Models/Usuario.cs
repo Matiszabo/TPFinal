@@ -31,6 +31,7 @@ namespace TPFinal.Models
             get { return _contraseña; }
             set { _contraseña = value; }
         }
+    public List<JuegoUsuarioLikes> Likes { get; set; }
 
     }
 }

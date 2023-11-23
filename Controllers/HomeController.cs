@@ -54,8 +54,7 @@ public class HomeController : Controller
             Usuario usuarioBD = BD.BuscarUsuarioXNombre(U.Nombre);
             if (usuarioBD.Contraseña == U.Contraseña)
             {
-                return RedirectToAction("PaginaPrincipal", "Home");
-
+            return RedirectToAction("PaginaPrincipal", "Home", new { IdUsuario = usuarioBD.IdUsuario});
             }
             else
             {
@@ -97,7 +96,13 @@ public class HomeController : Controller
     public IActionResult OlvidoContraseña(Usuario U)
     {
         ViewBag.Usuario = BD.BuscarContraXUsuario(U.Nombre);
+        if (ViewBag.Usuario != null) {
         ViewBag.Mensaje = "La contraseña es: " + ViewBag.Usuario.Contraseña;
+        }
+        else
+        {
+            ViewBag.Mensaje = "No encontramos el usuario ingresado";
+        }
         return View();
     }
         public IActionResult BuscarOlvidoContraseña()
@@ -118,11 +123,11 @@ public class HomeController : Controller
             return View("Registrarse");
         }
     }
-
+    
     public IActionResult PaginaPrincipal()
     {
-        ViewBag.listaJuegos = BD.TraerJuegos();
 
+        ViewBag.listaJuegos = BD.TraerJuegos();
         return View("Index");
     }
     public IActionResult ComprarJuego()
@@ -164,9 +169,10 @@ public class HomeController : Controller
 
     //Retorna la nueva cantidad de likes
     [HttpPost]
-    public int LikesAjax(int IdJuego, int cantLikes)
+    public int LikesAjax(int IdJuego, int cantLikes, int IdUsuario)
     {
         BD.ActualizarLikesJuegoSP(IdJuego, cantLikes);
+        // BD.ActualizarLikePersona(IdJuego, IdUsuario);
         return BD.VerCantLikes(IdJuego);
     }
 

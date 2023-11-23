@@ -14,12 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  background-image: url(/fondo.jpg);
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: repeat;
+  background: rgb(18,180,232);
+  background: linear-gradient(90deg, rgba(18,180,232,1) 0%, rgba(2,156,218,1) 30%, rgba(2,156,218,1) 72%, rgba(18,209,232,1) 100%);
 }
 .NuevoJuego {
   position: absolute;
@@ -42,6 +38,10 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+.imag1{
+  margin-left: 55px;
 }
 
 

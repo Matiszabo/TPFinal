@@ -44,7 +44,6 @@ body {
   margin-left: 55px;
 }
 
-
 .formLogin button {
   width: 40%;
   padding: 10px;
@@ -148,13 +147,6 @@ body {
 /* comprar */
 
 
-.custom-info {
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
-  padding: 10px; /* Espaciado interior */
-  border-radius: 5px; /* Bordes redondeados, ajusta según sea necesario */
-  margin-bottom: 10px; /* Espaciado inferior */
-}
 
 
 

@@ -63,7 +63,22 @@ namespace TPFinal.Models
                 }, commandType: CommandType.StoredProcedure);
             }
         }
-
+        public static int VerificarSiExisteTarjeta (Tarjeta T)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT * FROM Tarjeta WHERE Numero = @pNumero";
+                return db.QueryFirstOrDefault<int>(sql, new { pNumero = Numero });
+            }
+        }    public IActionResult VerificatTarjeta(Tarjeta T)
+    {
+        Tarjeta tarjetaBD = BD.VerificarSiExisteTarjeta;
+        return RedirectToAction("Compra", "Home");
+    }
+        public IActionResult Compra()
+        {
+            return View();
+        }
         public static int ActualizarLikesJuegoSP(int idJuego, int cantLikes)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))

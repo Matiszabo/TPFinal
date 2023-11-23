@@ -30,6 +30,15 @@ public class HomeController : Controller
     {
         return View();
     }
+       public IActionResult VerificatTarjeta(Tarjeta T)
+    {
+        Tarjeta tarjetaBD = BD.VerificarSiExisteTarjeta;
+        return RedirectToAction("Compra", "Home");
+    }
+        public IActionResult Compra()
+        {
+            return View();
+        }
     public IActionResult VerificarUsuario(Usuario U)
     {
 

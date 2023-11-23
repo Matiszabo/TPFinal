@@ -63,12 +63,12 @@ namespace TPFinal.Models
                 }, commandType: CommandType.StoredProcedure);
             }
         }
-        public static int VerificarSiExisteTarjeta (Tarjeta T)
+        public static Tarjeta VerificarSiExisteTarjeta(int numero)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 string sql = "SELECT * FROM Tarjeta WHERE Numero = @pNumero";
-                return db.QueryFirstOrDefault<int>(sql, new { pNumero = Numero });
+                return db.QueryFirstOrDefault<Tarjeta>(sql, new { pNumero = numero});
             }
         }   
         public static int ActualizarLikesJuegoSP(int idJuego, int cantLikes)

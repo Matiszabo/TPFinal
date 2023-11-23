@@ -30,15 +30,22 @@ public class HomeController : Controller
     {
         return View();
     }
-       public IActionResult VerificatTarjeta(Tarjeta T)
+    public IActionResult VerificarTarjeta(Tarjeta T)
     {
-        Tarjeta tarjetaBD = BD.VerificarSiExisteTarjeta;
-        return RedirectToAction("Compra", "Home");
-    }
-        public IActionResult Compra()
+        Tarjeta tarjeta = BD.VerificarSiExisteTarjeta(T.Numero);
+        if (tarjeta != null)
         {
-            return View();
+            return RedirectToAction("Compra", "Home");
         }
+        else
+        {
+            return RedirectToAction("Error", "Home");
+        }
+    }
+    public IActionResult Compra()
+    {
+        return View();
+    }
     public IActionResult VerificarUsuario(Usuario U)
     {
 
@@ -62,7 +69,6 @@ public class HomeController : Controller
             return View("IniciarSesion");
         }
     }
-
     public bool VerificarSiExisteUsuario(Usuario U)
     {
         return BD.BuscarUsuarioXNombre(U.Nombre) != null;

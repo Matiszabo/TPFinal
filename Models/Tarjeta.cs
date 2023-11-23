@@ -4,16 +4,16 @@ namespace TPFinal.Models
 {
     public class Tarjeta
     {
-        private int _numero;
-        private string _titular;
-        private int _codigoseq;
+    private int _numero;
+    private string _titular;
+    private int _codigoseg;
 
-        public Tarjeta(int Numero, string Titular, int CodigoSeq)
-        {
-            _numero = Numero;
-            _titular = Titular;
-            _codigoseq = CodigoSeq;
-        }
+    public Tarjeta(int Numero, string Titular, int CodigoSeg)
+    {
+        _numero = Numero;   
+        _titular = Titular;
+        _codigoseg = CodigoSeg; 
+    }
         public Tarjeta() { }
         public int Numero
         {
@@ -26,10 +26,10 @@ namespace TPFinal.Models
             get { return _titular; }
             set { _titular = value; }
         }
-        public string CodigoSeq
+        public int CodigoSeg
         {
-            get { return _codigoseq; }
-            set { _codigoseq = value; }
+        get { return _codigoseg; }
+        set { _codigoseg = value; }
         }
 
     }

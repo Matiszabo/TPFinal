@@ -41,19 +41,19 @@
 <body class="body-style">
     <div class="page-container">
         <div class="container formulario-pago">
-            <form action='@Url.Action("PaginaPrincipal","Home")' onsubmit="alert('Gracias por su compra')">
+            <form  action='@Url.Action("VerificarTarjeta","Home")'>
                 <div class="form-group">
                     <label for="inputEmail4">Titular de Tarjeta</label>
-                    <input type="text" class="form-control" id="inputEmail4" required>
+                    <input type="text" class="form-control" id="inputEmail4" name="Titular" required>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword4">Numero de Tarjeta</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="XXXX-XXXX-XXXX-XXXX"
+                    <input type="number" class="form-control" id="inputPassword4" name="Numero" placeholder="XXXX-XXXX-XXXX-XXXX"
                         required>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword4">Codigo de seguridad</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="XXX" required>
+                    <input type="password" class="form-control" id="inputPassword4" name="CodigoSeg" placeholder="XXX" required>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Direccion</label>

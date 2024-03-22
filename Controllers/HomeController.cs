@@ -194,10 +194,10 @@ public class HomeController : Controller
 
     public IActionResult AgregarAlCarrito(int idJuego)
     {
-         // forma de obtener el ID de usuario en tu aplicación
+        // forma de obtener el ID de usuario en tu aplicación
         // Agrega el juego al carrito con una cantidad predeterminada
-            BD.AgregarJuegoAlCarrito(idUsuario, idJuego, cantidad:); //agregarle la cantidad
-            return RedirectToAction("PaginaPrincipal", "Home");
+        BD.AgregarJuegoAlCarrito(idUsuario, idJuego, cantidad:); //agregarle la cantidad
+        return RedirectToAction("PaginaPrincipal", "Home");
         }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

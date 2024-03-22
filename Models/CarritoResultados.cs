@@ -2,21 +2,23 @@ using System;
 
 namespace TPFinal.Models
 {
-    public class Carritos
+    public class CarritosResultados
     {
-        private int _IdCarrito;
-        private int _IdUsuario;
-        private date _Fecha;
+        private int IdCarrito;
+        private date Fecha;
+        private string Nombre;
+        private int CantLikes;
         private bool _EstaFinalizado;
 
-        public Carritos(int _IdCarrito, int _IdUsuario, date _Fecha, bool _EstaFinalizado)
+        public CarritosResultados(int _IdCarrito, date _Fecha, string _Nombre, int _CantLikes, bool _EstaFinalizado)
         {
             _IdCarrito = IdCarrito;
-            _IdUsuario = IdUsuario;
             _Fecha=Fecha;
+            _Nombre = Nombre;
+            _CantLikes = CantLikes;
             _EstaFinalizado=EstaFinalizado;
         }
-        public Carritos() { 
+        public CarritosResultados() { 
 
         }
         
@@ -26,18 +28,22 @@ namespace TPFinal.Models
             set { _IdCarrito = value; }
         }
 
-        public int IdUsuario
-        {
-            get { return _IdUsuario; }
-            set { _IdUsuario = value; }
-        }
-
         public date Fecha
         {
             get { return _Fecha; }
             set { _Fecha = value; }
         }
 
+        public string Nombre
+        {
+            get { return _Nombre; }
+            set { _Nombre = value; }
+        }
+        public int CantLikes
+        {
+            get { return _CantLikes; }
+            set { _CantLikes = value; }
+        }
         public bool EstaFinalizado
         {
             get { return _EstaFinalizado; }

@@ -14,7 +14,10 @@ namespace TPFinal.Models
             _IdCarrito = IdCarrito;
             _IdJuego = IdJuego;
         }
-        public Carritosdetalles() { }
+        public Carritosdetalles() { 
+            
+        }
+
         public int IdCarritosDetalles
         {
             get { return _IdCarritoDetalle; }

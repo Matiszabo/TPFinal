@@ -9,8 +9,6 @@ using System.Linq;
 using Dapper;
 using System.Data.SqlClient;
 
-
-
 namespace TPFinal.Models
 {
     public class BD
@@ -126,8 +124,47 @@ namespace TPFinal.Models
                 string sql = "SELECT Contraseña FROM Usuarios WHERE Nombre = @Nombre";
                 return db.QueryFirstOrDefault<Usuario>(sql, new{ Nombre = nombre });
             }
+            
         }
+        public static CarritosResultados BuscarJuegosCarrito(int idUsuario)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = "SELECT dbo.Carritos.IdCarrito ,dbo.Carritos.Fecha, dbo.Juegos.Nombre, dbo.Juegos.CantLikes, dbo.Carritos.EstaFinalizado FROM dbo.Carritos INNER JOIN dbo.CarritosDetalle ON dbo.Carritos.IdCarrito = dbo.CarritosDetalle.IdCarrito INNER JOIN dbo.Juegos ON dbo.CarritosDetalle.IdJuego = dbo.Juegos.IdJuego WHERE Carritos.IdUsuario = @IdUsuario";
+                return db.Query<CarritosResultados>(sql, new{ IdUsuario = idUsuario });
+            }
+        }
+        public static void AgregarJuegoAlCarrito(int idUsuario, int idJuego, int cantidad)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                db.Open();
 
+                string sql = "SELECT IdCarrito FROM Carritos WHERE IdUsuario = @IdUsuario AND EstaFinalizado = 0";
+                int? idCarrito = db.QueryFirstOrDefault<int?>(sql, new { IdUsuario = idUsuario });
 
+                if (idCarrito == null)
+                {
+                    sql = "INSERT INTO Carritos (IdUsuario, Fecha, EstaFinalizado) VALUES (@IdUsuario, GETDATE(), 0); SELECT SCOPE_IDENTITY()";
+                    idCarrito = db.QueryFirstOrDefault<int>(sql, new { IdUsuario = idUsuario });
+                }
+
+                sql = "SELECT IdCarritoDetalle FROM CarritosDetalle WHERE IdCarrito = @IdCarrito AND IdJuego = @IdJuego";
+                int? idCarritoDetalle = db.QueryFirstOrDefault<int?>(sql, new { IdCarrito = idCarrito, IdJuego = idJuego });
+
+                if (idCarritoDetalle != null)
+                {
+                    sql = "UPDATE CarritosDetalle SET Cantidad = Cantidad + @Cantidad WHERE IdCarritoDetalle = @IdCarritoDetalle";
+                    db.Execute(sql, new { Cantidad = cantidad, IdCarritoDetalle = idCarritoDetalle });
+                }
+                else
+                {
+                    sql = "INSERT INTO CarritosDetalle (IdCarrito, IdJuego, Cantidad) VALUES (@IdCarrito, @IdJuego, @Cantidad)";
+                    db.Execute(sql, new { IdCarrito = idCarrito, IdJuego = idJuego, Cantidad = cantidad });
+                }
+
+                db.Close();
+            }
+        }
     }
-}
+}    

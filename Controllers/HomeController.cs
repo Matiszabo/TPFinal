@@ -46,6 +46,16 @@ public class HomeController : Controller
     {
         return View();
     }
+
+private const string SessionIdUsuario = "_IDUSUARIO";
+    private int ObtenerIdUsuarioLogueado(){
+        // obtener el Id del usuario logueado!!
+        //SESSION!
+        int id = HttpContext.Session.GetString(SessionIdUsuario)
+        
+        return id;
+    }
+
     public IActionResult VerificarUsuario(Usuario U)
     {
 
@@ -54,6 +64,8 @@ public class HomeController : Controller
             Usuario usuarioBD = BD.BuscarUsuarioXNombre(U.Nombre);
             if (usuarioBD.Contraseña == U.Contraseña)
             {
+                // ,me loguardo en la session!! usuarioBD.idUsuario
+                HttpContext.Session.SetString(SessionIdUsuario, usuarioBD.idUsuario);
             return RedirectToAction("PaginaPrincipal", "Home", new { IdUsuario = usuarioBD.IdUsuario});
             }
             else
@@ -188,21 +200,27 @@ public class HomeController : Controller
     {
         // forma de obtener el ID de usuario en tu aplicación
         // Obtén los juegos en el carrito para el usuario actual
+        int idUsuario = ObtenerIdUsuarioLogueado();
         var carrito = BD.BuscarJuegosCarrito(idUsuario);
         return View(carrito);
     }
 
-    public IActionResult AgregarAlCarrito(int idJuego)
+
+    public IActionResult AgregarAlCarrito(int idJuego, int cantidad)
     {
         // forma de obtener el ID de usuario en tu aplicación
         // Agrega el juego al carrito con una cantidad predeterminada
-        BD.AgregarJuegoAlCarrito(idUsuario, idJuego, cantidad:); //agregarle la cantidad
+        int idUsuario = ObtenerIdUsuarioLogueado();
+        BD.AgregarJuegoAlCarrito(idUsuario, idJuego, cantidad); //agregarle la cantidad
         return RedirectToAction("PaginaPrincipal", "Home");
-        }
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+
+    
 }

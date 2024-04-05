@@ -6,10 +6,10 @@ namespace TPFinal.Models
     {
         private int _IdCarrito;
         private int _IdUsuario;
-        private date _Fecha;
+        private DateTime _Fecha;
         private bool _EstaFinalizado;
 
-        public Carritos(int _IdCarrito, int _IdUsuario, date _Fecha, bool _EstaFinalizado)
+        public Carritos(int _IdCarrito, int _IdUsuario, DateTime _Fecha, bool _EstaFinalizado)
         {
             _IdCarrito = IdCarrito;
             _IdUsuario = IdUsuario;
@@ -32,7 +32,7 @@ namespace TPFinal.Models
             set { _IdUsuario = value; }
         }
 
-        public date Fecha
+        public DateTime Fecha
         {
             get { return _Fecha; }
             set { _Fecha = value; }

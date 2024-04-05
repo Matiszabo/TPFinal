@@ -134,6 +134,9 @@ namespace TPFinal.Models
                 return db.Query<CarritosResultados>(sql, new{ IdUsuario = idUsuario });
             }
         }
+                
+        
+
         public static void AgregarJuegoAlCarrito(int idUsuario, int idJuego, int cantidad)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -167,4 +170,4 @@ namespace TPFinal.Models
             }
         }
     }
-}    
+}

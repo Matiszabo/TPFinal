@@ -51,9 +51,9 @@ private const string SessionIdUsuario = "_IDUSUARIO";
     private int ObtenerIdUsuarioLogueado(){
         // obtener el Id del usuario logueado!!
         //SESSION!
-        int id = HttpContext.Session.GetString(SessionIdUsuario)
-        
-        return id;
+        //string sessionIdUsuarioStr = HttpContext.Session.GetString(SessionIdUsuario);
+        int? id = HttpContext.Session.GetInt32(SessionIdUsuario) ;
+        return id.GetValueOrDefault();
     }
 
     public IActionResult VerificarUsuario(Usuario U)
@@ -65,7 +65,7 @@ private const string SessionIdUsuario = "_IDUSUARIO";
             if (usuarioBD.Contraseña == U.Contraseña)
             {
                 // ,me loguardo en la session!! usuarioBD.idUsuario
-                HttpContext.Session.SetString(SessionIdUsuario, usuarioBD.idUsuario);
+                HttpContext.Session.SetInt32(SessionIdUsuario, usuarioBD.IdUsuario);
             return RedirectToAction("PaginaPrincipal", "Home", new { IdUsuario = usuarioBD.IdUsuario});
             }
             else
@@ -205,6 +205,16 @@ private const string SessionIdUsuario = "_IDUSUARIO";
         return View(carrito);
     }
 
+    public IActionResult GuardarCarrito(List <CarritosResultados> carritos)
+    {
+       int id = ObtenerIdUsuarioLogueado();
+        //recibe ID     
+        ViewBag.listaCarrito = BD.BuscarJuegosCarrito(id);
+
+        return RedirectToAction("VerCarrito", "Home");
+    }
+
+    
 
     public IActionResult AgregarAlCarrito(int idJuego, int cantidad)
     {

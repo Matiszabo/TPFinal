@@ -9,6 +9,30 @@
 </head>
 
 <body class="Carrito">
+
+   @{
+            @foreach (CarritosResultados item in @ViewBag.listaCarrito)
+            {
+                <div class="col-md-3">
+                    <div class="card bg-dark text-white w-100 mb-5">
+                        <img src="@item.Imagen" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" style="min-height:75px;">@item.Nombre</h5>
+                            <p class="card-text">
+                                <h6 class="likes">@item.CantLikes</h6>
+                                <img id="BotonLike" class="corazon" src="/CorazonBlanco.jpg" onclick="Likes(@item.CantLikes, this)">
+                            </p>
+                            <p>Precio: US$@item.Precio</p>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+
+
+
 </body>
 
 </html>

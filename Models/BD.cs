@@ -130,7 +130,7 @@ namespace TPFinal.Models
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT dbo.Carritos.IdCarrito ,dbo.Carritos.Fecha, dbo.Juegos.Nombre, dbo.Juegos.CantLikes, dbo.Carritos.EstaFinalizado FROM dbo.Carritos INNER JOIN dbo.CarritosDetalle ON dbo.Carritos.IdCarrito = dbo.CarritosDetalle.IdCarrito INNER JOIN dbo.Juegos ON dbo.CarritosDetalle.IdJuego = dbo.Juegos.IdJuego WHERE Carritos.IdUsuario = @IdUsuario";
+                string sql = "SELECT dbo.Carritos.IdCarrito ,dbo.Carritos.Fecha, dbo.Juegos.Nombre, dbo.Juegos.CantLikes, dbo.Juegos.Imagen, dbo.Carritos.EstaFinalizado, dbo.Juegos.Precio FROM dbo.Carritos INNER JOIN dbo.CarritosDetalle ON dbo.Carritos.IdCarrito = dbo.CarritosDetalle.IdCarrito INNER JOIN dbo.Juegos ON dbo.CarritosDetalle.IdJuego = dbo.Juegos.IdJuego WHERE Carritos.IdUsuario = @IdUsuario";
                 return  db.Query<CarritosResultados> (sql, new{ IdUsuario = idUsuario }).ToList();
             }
         }

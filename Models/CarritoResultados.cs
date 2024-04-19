@@ -23,9 +23,12 @@ namespace TPFinal.Models
 
         public string Nombre    { get; set; }
         public int CantLikes   { get; set; }
+        public string Imagen   { get; set; }
+
         public bool EstaFinalizado    { get; set; }
         public DateTime Fecha    { get; set; }
 
+         public int Precio { get;}
 
     }
 }

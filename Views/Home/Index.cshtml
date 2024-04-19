@@ -20,7 +20,7 @@ background: linear-gradient(90deg, rgba(18,180,232,1) 0%, rgba(2,156,218,1) 30%,
     <div class="row mb-3 mt-3">
         <div class="col d-flex justify-content-center">
             <a href='@Url.Action("AgregarJuego","Home")' class="btn btn-info">Agregar juego</a>
-            <h1></h1>
+            <h1>@ViewBag.idLogueado</h1>
         </div>
     </div>
     <div class="row">
@@ -40,6 +40,10 @@ background: linear-gradient(90deg, rgba(18,180,232,1) 0%, rgba(2,156,218,1) 30%,
                                 onclick="MostrarMasInfo(@item.IdJuego)">
                                 Más info
                             </button>
+                             <form  method="POST" action='@Url.Action("AgregarAlCarrito","Home", new {idJuego = item.IdJuego})' enctype="multipart/form-data">
+                              <input type="submit" class="btn btn-primary" value="AgregarAlCarrito">
+
+                             </form>
                             <p>Precio: US$@item.Precio</p>
 
                         </div>

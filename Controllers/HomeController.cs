@@ -137,8 +137,8 @@ private const string SessionIdUsuario = "_IDUSUARIO";
     }
     
     public IActionResult PaginaPrincipal()
-    {
-
+    {     
+        ViewBag.idLogueado = HttpContext.Session.GetInt32("_IDUSUARIO") ;
         ViewBag.listaJuegos = BD.TraerJuegos();
         return View("Index");
     }
@@ -216,12 +216,12 @@ private const string SessionIdUsuario = "_IDUSUARIO";
 
     
 
-    public IActionResult AgregarAlCarrito(int idJuego, int cantidad)
+    public IActionResult AgregarAlCarrito(int idJuego)
     {
         // forma de obtener el ID de usuario en tu aplicación
         // Agrega el juego al carrito con una cantidad predeterminada
         int idUsuario = ObtenerIdUsuarioLogueado();
-        BD.AgregarJuegoAlCarrito(idUsuario, idJuego, cantidad); //agregarle la cantidad
+        BD.AgregarJuegoAlCarrito(idUsuario, idJuego); //agregarle la cantidad
         return RedirectToAction("PaginaPrincipal", "Home");
     }
 

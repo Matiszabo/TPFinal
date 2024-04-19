@@ -137,7 +137,7 @@ namespace TPFinal.Models
                 
         
 
-        public static void AgregarJuegoAlCarrito(int idUsuario, int idJuego, int cantidad)
+        public static void AgregarJuegoAlCarrito(int idUsuario, int idJuego)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
@@ -157,13 +157,13 @@ namespace TPFinal.Models
 
                 if (idCarritoDetalle != null)
                 {
-                    sql = "UPDATE CarritosDetalle SET Cantidad = Cantidad + @Cantidad WHERE IdCarritoDetalle = @IdCarritoDetalle";
-                    db.Execute(sql, new { Cantidad = cantidad, IdCarritoDetalle = idCarritoDetalle });
+                    sql = "INSERT INTO CarritosDetalle (IdCarrito, IdJuego) VALUES (@IdCarrito, @IdJuego)";
+                    db.Execute(sql, new { IdCarrito = idCarrito, IdJuego = idJuego});
                 }
                 else
                 {
-                    sql = "INSERT INTO CarritosDetalle (IdCarrito, IdJuego, Cantidad) VALUES (@IdCarrito, @IdJuego, @Cantidad)";
-                    db.Execute(sql, new { IdCarrito = idCarrito, IdJuego = idJuego, Cantidad = cantidad });
+                    sql = "INSERT INTO CarritosDetalle (IdCarrito, IdJuego) VALUES (@IdCarrito, @IdJuego)";
+                    db.Execute(sql, new { IdCarrito = idCarrito, IdJuego = idJuego});
                 }
 
                 db.Close();

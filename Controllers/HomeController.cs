@@ -138,7 +138,6 @@ private const string SessionIdUsuario = "_IDUSUARIO";
     
     public IActionResult PaginaPrincipal()
     {     
-        ViewBag.idLogueado = HttpContext.Session.GetInt32("_IDUSUARIO") ;
         ViewBag.listaJuegos = BD.TraerJuegos();
         return View("Index");
     }
